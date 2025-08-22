@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm")
     id("org.jetbrains.kotlin.plugin.serialization") version "2.2.10"
     id("com.vanniktech.maven.publish") version "0.34.0"
+    id("signing")
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -30,7 +31,7 @@ gradlePlugin {
 }
 
 mavenPublishing {
-    coordinates("io.github.thatworld", "cargondk", "0.0.1")
+    coordinates("io.github.thatworld", "cargondk", "0.0.2")
 
     pom {
         name.set("cargo-ndk-plugin")

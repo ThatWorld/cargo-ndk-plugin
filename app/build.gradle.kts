@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("io.github.thatworld.cargondk") version "0.0.1"
+    id("io.github.thatworld.cargondk") version "0.0.2"
 }
 
 cargoNdk {
