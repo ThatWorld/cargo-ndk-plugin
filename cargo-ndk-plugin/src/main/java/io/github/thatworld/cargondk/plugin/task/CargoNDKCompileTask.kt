@@ -1,19 +1,19 @@
 package io.github.thatworld.cargondk.plugin.task
 
 import io.github.thatworld.cargondk.plugin.bean.CargoToml
-import io.github.thatworld.cargondk.plugin.InjectedExecOps
 import org.gradle.api.DefaultTask
-import org.gradle.api.Project
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
+import org.gradle.process.ExecOperations
 import java.io.ByteArrayOutputStream
 import java.io.File
+import javax.inject.Inject
 
-open class CargoNDKCompileTask : DefaultTask() {
+open class CargoNDKCompileTask @Inject constructor(private val execOps: ExecOperations) : DefaultTask() {
     @get:Input
     lateinit var variantName: String
 
@@ -33,6 +33,9 @@ open class CargoNDKCompileTask : DefaultTask() {
     var platform: Int = 21
 
     @get:Input
+    lateinit var environment: Map<String, String>
+
+    @get:Input
     lateinit var args: Set<String>
 
     @get:Internal
@@ -43,7 +46,7 @@ open class CargoNDKCompileTask : DefaultTask() {
      * This function checks if cargo and cargo-ndk are installed, installs them if necessary,
      * checks for required targets, and runs the cargo-ndk command to compile the project.
      */
-    fun Project.cargoNDKCompile(
+    fun cargoNDKCompile(
         cargoToml: CargoToml,
         abiFilters: Set<String>,
         variantName: String,
@@ -53,8 +56,6 @@ open class CargoNDKCompileTask : DefaultTask() {
         platform: Int,
         args: Set<String>,
     ) {
-        val execOps = this.objects.newInstance(InjectedExecOps::class.java).execOps
-
         val errorStream = ByteArrayOutputStream()
         val standardStream = ByteArrayOutputStream()
 
@@ -161,9 +162,7 @@ open class CargoNDKCompileTask : DefaultTask() {
             )
 
             // args
-            if (args.isNotEmpty()) {
-                compileCommand += args
-            }
+            compileCommand += args
 
             // build
             compileCommand += if (variantName == "release") {
@@ -177,6 +176,7 @@ open class CargoNDKCompileTask : DefaultTask() {
             execOps.exec { exec ->
                 exec.commandLine = compileCommand
                 exec.workingDir = rustSourceFile
+                exec.environment.putAll(environment)
             }
         } catch (e: Exception) {
             throw RuntimeException("cargo-ndk failed to run, please check the error message: $errorStream")
@@ -185,7 +185,7 @@ open class CargoNDKCompileTask : DefaultTask() {
 
     @TaskAction
     fun compile() {
-        project.cargoNDKCompile(
+        cargoNDKCompile(
             cargoToml = cargoToml,
             abiFilters = abiFilters,
             variantName = variantName,

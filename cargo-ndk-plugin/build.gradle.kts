@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     id("java-gradle-plugin")
     id("org.jetbrains.kotlin.jvm")
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.2.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.2.10"
     id("com.vanniktech.maven.publish") version "0.34.0"
 }
 java {
@@ -16,7 +16,7 @@ kotlin {
     }
 }
 dependencies {
-    implementation("com.android.tools.build:gradle:8.10.1")
+    implementation("com.android.tools.build:gradle:8.12.1")
     implementation("com.akuleshov7:ktoml-core:0.7.0")
     implementation("com.akuleshov7:ktoml-file:0.7.0")
 }

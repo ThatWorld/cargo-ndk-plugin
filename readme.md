@@ -1,5 +1,7 @@
 # Cargo NDK Plugin
 
+![maven-central](https://img.shields.io/maven-central/v/io.github.thatworld/cargondk)
+
 This is a Cargo plugin that simplifies building Rust projects for Android using the Android NDK.
 
 It automates the process of setting up the NDK toolchain, configuring the build environment, and compiling the Rust code for various Android architectures.
@@ -23,7 +25,6 @@ Please refer to the [app](/app/src/main) module for the default project structur
 
 ## Features
 
-- [cargo-ndk-specific-environment-variables](https://github.com/bbqsrc/cargo-ndk?tab=readme-ov-file#cargo-ndk-specific-environment-variables)
 - ...
 
 ## Reference

@@ -41,6 +41,15 @@ open class CargoNDKExtension {
     var platform: Int = 21
 
     /**
+     * Environment variables to pass to the cargo ndk command.
+     * You can use this to set any additional environment variables needed for the build process.
+     * The default value is an empty map, which means no additional environment variables are set.
+     *
+     * more please see: https://github.com/bbqsrc/cargo-ndk?tab=readme-ov-file#cargo-ndk-specific-environment-variables
+     */
+    val environment: MutableMap<String, String> = mutableMapOf()
+
+    /**
      * The arguments to pass to the `cargo ndk` command.
      * You can use this to specify additional options for the build process.
      * For example, you can specify the target architecture or other cargo options.

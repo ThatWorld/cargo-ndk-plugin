@@ -1,14 +1,14 @@
 package io.github.thatworld.cargondk.plugin.task
 
-import io.github.thatworld.cargondk.plugin.InjectedExecOps
 import org.gradle.api.DefaultTask
-import org.gradle.api.Project
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.TaskAction
+import org.gradle.process.ExecOperations
 import java.io.File
+import javax.inject.Inject
 
-open class CargoNDKCleanTask : DefaultTask() {
+open class CargoNDKCleanTask @Inject constructor(private val execOps: ExecOperations) : DefaultTask() {
     @get:Input
     var cleanTarget: Boolean = false
 
@@ -20,12 +20,10 @@ open class CargoNDKCleanTask : DefaultTask() {
      * This function deletes the compiled shared libraries from the output directory
      * and runs `cargo clean` if the `cleanTarget` flag is set to true
      */
-    fun Project.cargoNDKClean(
+    fun cargoNDKClean(
         rustSourceFile: File,
         cleanTarget: Boolean,
     ) {
-        val execOps = this.objects.newInstance(InjectedExecOps::class.java).execOps
-
         // Clean the Cargo build artifacts
         if (cleanTarget) {
             execOps.exec { exec ->
@@ -37,7 +35,7 @@ open class CargoNDKCleanTask : DefaultTask() {
 
     @TaskAction
     fun clean() {
-        project.cargoNDKClean(
+        cargoNDKClean(
             rustSourceFile,
             cleanTarget
         )

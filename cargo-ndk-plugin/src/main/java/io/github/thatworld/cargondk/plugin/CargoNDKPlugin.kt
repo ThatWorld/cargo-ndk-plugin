@@ -36,6 +36,7 @@ class CargoNDKPlugin : Plugin<Project> {
                 val abiFilters = appModuleExtension.defaultConfig.ndk.abiFilters
                 val rustSource = cargoNDKExtension.source
                 val manifestPath = cargoNDKExtension.manifestPath
+                val environment = cargoNDKExtension.environment
                 val output = cargoNDKExtension.output
                 val platform = cargoNDKExtension.platform
                 val args = cargoNDKExtension.args
@@ -54,6 +55,7 @@ class CargoNDKPlugin : Plugin<Project> {
                     task.manifestFile = getManifestFile(rustSource, manifestPath)
                     task.outputFile = getOutputFile(output.variantFormat(variant.name))
                     task.platform = platform
+                    task.environment = environment
                     task.args = args
                     task.cargoToml = cargoToml
                 }
