@@ -15,8 +15,8 @@ plugins {
 }
 
 cargoNdk {
-    source = /* rust rpoject source path */
-    manifestPath = /* rust rpoject Cargo.toml */
+    source = /* rust project source path */
+    manifestPath = /* rust project Cargo.toml */
     ...
 }
 ```
@@ -29,4 +29,5 @@ Please refer to the [app](/app/src/main) module for the default project structur
 
 ## Reference
 
-- [cargo-ndk](https://crates.io/crates/cargo-ndk)
+- [cargo-ndk](https://github.com/bbqsrc/cargo-ndk)
+- [ktoml](https://github.com/orchestr7/ktoml)

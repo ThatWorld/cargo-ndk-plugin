@@ -18,8 +18,8 @@ kotlin {
 }
 dependencies {
     implementation("com.android.tools.build:gradle:8.12.1")
-    implementation("com.akuleshov7:ktoml-core:0.7.0")
-    implementation("com.akuleshov7:ktoml-file:0.7.0")
+    implementation("com.akuleshov7:ktoml-core:0.7.1")
+    implementation("com.akuleshov7:ktoml-file:0.7.1")
 }
 gradlePlugin {
     plugins {
@@ -31,7 +31,7 @@ gradlePlugin {
 }
 
 mavenPublishing {
-    coordinates("io.github.thatworld", "cargondk", "0.0.2")
+    coordinates("io.github.thatworld", "cargondk", "0.0.3")
 
     pom {
         name.set("cargo-ndk-plugin")

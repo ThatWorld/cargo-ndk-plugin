@@ -143,11 +143,12 @@ class CargoNDKPlugin : Plugin<Project> {
      * If not, throw a GradleException with an appropriate message.
      */
     fun Project.parseCargoToml(rustSource: String, manifestPath: String): CargoToml {
+        // ensure the Cargo.toml file exists
         val cargoToml = getManifestFile(rustSource, manifestPath)
         if (!cargoToml.exists() && !cargoToml.isFile)
             throw GradleException(
                 "`Cargo.toml` not found in ${cargoToml.absolutePath}, " +
-                        "please ensure that the cargoNdk.rustSrc directory is set correctly."
+                        "Please ensure that the \n\tcargoNdk {\n\t\tsource = \"..\" \n\t}\ndirectory is correctly set up in `build.gradle`."
             )
 
         // parse the Cargo.toml file
@@ -158,8 +159,12 @@ class CargoNDKPlugin : Plugin<Project> {
         ).decodeFromString<CargoToml>(
             getManifestFile(rustSource, manifestPath)
                 .readText()
-        ).also {
-            // todo: check cargoToml whether it contains [lib] and `crate-type = ["cdylib"]`
+        ).also { toml ->
+            if (!toml.lib.crateType.contains("cdylib"))
+                throw GradleException(
+                    "`Cargo.toml` in ${cargoToml.absolutePath} " +
+                            "must contain `crate-type = [\"cdylib\"]` in [lib] section."
+                )
         }
     }
 }

@@ -11,8 +11,6 @@ data class CargoToml(
     @Serializable
     data class Package(
         val name: String,
-        val version: String,
-        val edition: String,
     )
 
     @Serializable
