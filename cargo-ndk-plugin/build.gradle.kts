@@ -3,24 +3,28 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     id("java-gradle-plugin")
     id("org.jetbrains.kotlin.jvm")
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.2.10"
-    id("com.vanniktech.maven.publish") version "0.34.0"
+    id("org.jetbrains.kotlin.plugin.serialization")
+    id("com.vanniktech.maven.publish")
     id("signing")
 }
+
 java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 }
+
 kotlin {
     compilerOptions {
         jvmTarget = JvmTarget.JVM_11
     }
 }
+
 dependencies {
-    implementation("com.android.tools.build:gradle:8.12.1")
-    implementation("com.akuleshov7:ktoml-core:0.7.1")
-    implementation("com.akuleshov7:ktoml-file:0.7.1")
+    implementation(libs.android.tools.gradle)
+    implementation(libs.ktoml.core)
+    implementation(libs.ktoml.file)
 }
+
 gradlePlugin {
     plugins {
         create("cargo-ndk-plugin") {
@@ -31,7 +35,7 @@ gradlePlugin {
 }
 
 mavenPublishing {
-    coordinates("io.github.thatworld", "cargondk", "0.0.3")
+    coordinates("io.github.thatworld", "cargondk", "0.0.4")
 
     pom {
         name.set("cargo-ndk-plugin")

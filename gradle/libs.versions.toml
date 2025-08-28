@@ -5,10 +5,12 @@ coreKtx = "1.17.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
 espressoCore = "3.7.0"
-lifecycleRuntimeKtx = "2.9.2"
+lifecycleRuntimeKtx = "2.9.3"
 activityCompose = "1.10.1"
-composeBom = "2025.08.00"
-jetbrainsKotlinJvm = "2.2.0"
+composeBom = "2025.08.01"
+publish = "0.34.0"
+ktomlCore = "0.7.0"
+ktomlFile = "0.7.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -25,11 +27,14 @@ androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "u
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+android-tools-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+ktoml-file = { module = "com.akuleshov7:ktoml-file", version.ref = "ktomlFile" }
+ktoml-core = { module = "com.akuleshov7:ktoml-core", version.ref = "ktomlCore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-android-library = { id = "com.android.library", version.ref = "agp" }
-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "publish" }
 
