@@ -40,6 +40,7 @@ class CargoNDKPlugin : Plugin<Project> {
                 val output = cargoNDKExtension.output
                 val platform = cargoNDKExtension.platform
                 val args = cargoNDKExtension.args
+                val release = cargoNDKExtension.release
                 val cargoToml = parseCargoToml(rustSource, manifestPath)
 
                 val variantUpName = variant.name.replaceFirstChar { it.uppercase() }
@@ -49,7 +50,7 @@ class CargoNDKPlugin : Plugin<Project> {
                 ) { task ->
                     task.group = "Cargo NDK"
                     task.description = "Compiles the Rust project using cargo-ndk."
-                    task.variantName = variant.name
+                    task.variantName = if (release) "release" else variant.name
                     task.abiFilters = abiFilters
                     task.rustSourceFile = getRustSourceFile(rustSource)
                     task.manifestFile = getManifestFile(rustSource, manifestPath)

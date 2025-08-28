@@ -67,4 +67,14 @@ open class CargoNDKExtension {
      * default is `false`.
      */
     var cleanTarget: Boolean = false
+
+    /**
+     * If `true`, build the release version of the Rust code.
+     * If `false`, build the debug version.
+     * The default value is `false`, This will mean following the studio's operating mode.
+     * You can change it to `true` to build the release version.
+     *
+     * Generally speaking, release execution speed is faster, which makes it easier for you to test performance, but debug versions retain more debugging information, which is more helpful during debugging。
+     */
+    var release: Boolean = false
 }
