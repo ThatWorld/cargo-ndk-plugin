@@ -79,22 +79,23 @@ class CargoNDKPlugin : Plugin<Project> {
                 tasks.named("mergeDebugNativeLibs") { task ->
                     task.finalizedBy("cargoNDKDebugCompile")
                 }
-                tasks.named("stripDebugDebugSymbols") { task ->
-                    task.dependsOn("cargoNDKDebugCompile")
-                }
+                tasks.findByName("stripDebugDebugSymbols")
+                    ?.dependsOn("cargoNDKDebugCompile")
+                tasks.findByName("copyDebugJniLibsProjectOnly")
+                    ?.dependsOn("cargoNDKDebugCompile")
 
                 // release
                 tasks.named("mergeReleaseNativeLibs") { task ->
                     task.finalizedBy("cargoNDKReleaseCompile")
                 }
-                tasks.named("stripReleaseDebugSymbols") { task ->
-                    task.dependsOn("cargoNDKReleaseCompile")
-                }
+                tasks.findByName("stripReleaseDebugSymbols")
+                    ?.dependsOn("cargoNDKDebugCompile")
+                tasks.findByName("copyReleaseJniLibsProjectOnly")
+                    ?.dependsOn("cargoNDKDebugCompile")
 
                 // clean
-                tasks.named("clean") { tasks ->
-                    tasks.dependsOn("cargoNDKClean")
-                }
+                tasks.findByName("clean")
+                    ?.dependsOn("cargoNDKClean")
             }
         }
     }

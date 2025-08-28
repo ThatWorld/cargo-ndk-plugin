@@ -35,7 +35,7 @@ gradlePlugin {
 }
 
 mavenPublishing {
-    coordinates("io.github.thatworld", "cargondk", "0.0.4")
+    coordinates("io.github.thatworld", "cargondk", "0.0.5")
 
     pom {
         name.set("cargo-ndk-plugin")
